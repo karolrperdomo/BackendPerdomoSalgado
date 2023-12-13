@@ -71,7 +71,7 @@ class ProductManager {
             this.products.splice(index, 1);
             this.saveProducts();
         } else {
-            throw new Error(`Producto con id ${id} no encuentro.`);
+            throw new Error(`Producto con id ${id} no encontrado.`);
         }
     }
 }
@@ -122,7 +122,7 @@ app.delete('/api/products/:productId', (req, res) => {
     const { productId } = req.params;
     try {
         productManager.deleteProduct(parseInt(productId));
-        res.send({ status: 'success', message: 'Producto añadeliminado satisfactoriamente' });
+        res.send({ status: 'success', message: 'Producto eliminado satisfactoriamente' });
     } catch (error) {
         res.status(404).send({ status: 'error', error: error.message });
     }

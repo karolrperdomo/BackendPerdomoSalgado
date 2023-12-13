@@ -1,0 +1,11 @@
+[
+  {
+    "id": 2,
+    "title": "Nuevo Producto",
+    "description": "Descripción del nuevo producto",
+    "price": 50,
+    "thumbnail": "ruta/imagen.jpg",
+    "code": "ABC123",
+    "stock": 10
+  }
+]
