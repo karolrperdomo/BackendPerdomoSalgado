@@ -1,37 +1,67 @@
-// Importación de módulos y archivos necesarios
-import express from 'express'; // Importando el framework Express
-import productsRoutes from './routes/products.routes.js'; // Importando las rutas de productos
-import { __dirname } from './utils.js'; // Importando la función de utilidad para obtener el directorio actual
-import handlebars from 'express-handlebars'; // Importando Handlebars para la representación de plantillas
-import viewsRoutes from './routes/views.routes.js'; // Importando las rutas de vistas
-import { Server } from 'socket.io'; // Importando el servidor Socket.IO
-import socketProducts from './listeners/socketProducts.js'; // Importando el controlador de eventos de Socket.IO para productos
+const express = require('express');
+const app = express();
+const handlebars = require('express-handlebars');
+const { Server: ServerIO, Server }  = require('socket.io')
+const fs = require('fs');
 
-// Creando una instancia del servidor Express
-const server = express();
-const PORT = 8080; // Estableciendo el puerto del servidor
 
-// Configuración del middleware
-server.use(express.static(__dirname + "/public")); // Sirviendo archivos estáticos desde el directorio 'public'
-server.use(express.json()); // Analizando las solicitudes JSON entrantes
-server.use(express.urlencoded({ extended: true })); // Analizando los datos de formulario entrantes
+const cartRouter = require('./routes/carts.router.js')
+const productRouter = require('./routes/products.router.js')
 
-// Configurando las rutas de la API y las vistas
-server.use('/api', productsRoutes); // Rutas de la API para productos
-server.use('/', viewsRoutes); // Rutas de vistas
 
-// Iniciando el servidor HTTP y registrando los detalles del servidor
-const httpServer = server.listen(PORT, () => {
-    console.log(`Servidor escuchando en el puerto ${PORT}`);
-    console.log(`\t1). http://localhost:${PORT}/api/products`);
-    console.log(`\t2). http://localhost:${PORT}/api/carts`);
+const productsData = fs.readFileSync('./src/jsonDb/products.json', 'utf-8');
+const productos = JSON.parse(productsData);
+
+
+
+app.use(express.static(__dirname + "/public"));
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+
+// Configuración de Handlebars
+app.engine('handlebars', handlebars.engine())
+app.set('view engine', 'handlebars');
+app.set('views', __dirname + '/views');
+
+
+app.get('/', (req, res) => {
+    res.render('home', { productos });
 });
 
-// Configurando Handlebars para la representación de plantillas
-server.engine('handlebars', handlebars.engine());
-server.set('views', __dirname + '/views');
-server.set('view engine', 'handlebars');
+app.get('/realtimeproducts', (req, res) => {
+    res.render('realTimeProducts', { productos });
+});
 
-// Configurando el servidor Socket.IO y adjuntando el controlador de eventos
-const socketServer = new Server(httpServer);
-socketProducts(socketServer);
+
+app.use('/api/carts', cartRouter)
+app.use('/api/products', productRouter)
+
+
+const httpServer = app.listen(8080, () => {
+    console.log('Server listening on port 8080');
+});
+
+const io = new ServerIO(httpServer)
+
+io.on('connection', (socket) => {
+    console.log('Usuario conectado');
+    socket.emit('updateProducts', productos);
+
+    socket.on('addProduct', (newProduct) => {
+        // Agregar el nuevo producto a la lista
+        productos.push(newProduct);
+    
+        // Guardar los cambios en el archivo JSON
+        fs.writeFile('./src/jsonDb/products.json', JSON.stringify(productos), (err) => {
+            if (err) {
+                console.error('Error writing to products.json', err);
+                return;
+            }
+            console.log('Product added and database updated.');
+    
+            // Emitir la lista actualizada de productos a todos los clientes
+            io.emit('updateProducts', productos);
+        });
+    });
+});

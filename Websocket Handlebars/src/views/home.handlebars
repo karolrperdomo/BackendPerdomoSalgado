@@ -1,39 +1,17 @@
-<!-- Página de listado de productos -->
 
-<!-- Sección de bienvenida y título -->
-<div> Bienvenido, listado de productos. </div>
-<div class="container mt-5">
-    <h1 class="text-center mb-4">PRODUCTOS</h1>
-
-    <!-- Grid de productos usando clases de Bootstrap -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
-        {{#each listadeproductos}}
-        <!-- Tarjeta de producto -->
-        <div class="col mb-4">
-            <div class="card h-100 bg-light">
-                <!-- Encabezado de la tarjeta con el código del producto -->
-                <div class="card-header bg-primary text-white">
-                    <i class="bi bi-tag"></i> Code: {{this.code}}
-                </div>
-                <!-- Cuerpo de la tarjeta con detalles del producto -->
-                <div class="card-body">
-                    <h5 class="card-title text-white">{{this.title}}</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="bi bi-info-circle"></i> ID: {{this.id}}</li>
-                        <li><i class="bi bi-file-text"></i> Descripción: {{this.description}}</li>
-                        <li><i class="bi bi-currency-dollar"></i> Precio: ${{this.price}}</li>
-                        <li><i class="bi bi-grid"></i> Categoría: {{this.category}}</li>
-                        <li><i class="bi bi-check-circle"></i> Estado: {{this.status}}</li>
-                        <li><i class="bi bi-box"></i> Stock: {{this.stock}}</li>
-                        <li>
-                            <!-- Mostrando la imagen del producto -->
-                            <i class="bi bi-image"></i> Imagen: <img src="{{this.thumbnail}}" alt="{{this.title}}"
-                                class="img-fluid mt-2">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        {{/each}}
-    </div>
-</div>
+<h1>Lista de Productos</h1>
+<ul>
+{{#each productos}}
+    <li>
+    <strong>ID:</strong> {{this.id}} <br>
+    <strong>Título:</strong> {{this.title}} <br>
+    <strong>Descripción:</strong> {{this.description}} <br>
+    <strong>Código:</strong> {{this.code}} <br>
+    <strong>Precio:</strong> {{this.price}} <br>
+    <strong>status:</strong> {{this.status}} <br>
+    <strong>Stock:</strong> {{this.stock}} <br>
+    <strong>Categria:</strong> {{this.category}} <br>
+    <strong>Thumbnails:</strong> {{this.thumbnails}} <br>
+    </li>
+{{/each}}
+</ul>

@@ -1,115 +1,45 @@
-<!-- Formulario para productos en tiempo real -->
-<form class="row g-3 mx-4" id="formProduct">
-    
-    <!-- Sección para agregar nuevos productos -->
-    <div class="col-12">
-        <h2 class="mb-4">Agregar Producto</h2>
+<center>
+<h1>Productos en tiempo real</h1>
+</center>
 
-        <!-- Filas para los campos del producto -->
-        <div class="row">
-            <!-- Nombre del Producto -->
-            <div class="col-md-6">
-                <label for="title" class="form-label">Nombre del Producto</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-box"></i></span>
-                    <input class="form-control" type="text" name="title" id="title" placeholder="Ej. Smartphone" required>
-                </div>
-            </div>
 
-            <!-- Descripción -->
-            <div class="col-md-6">
-                <label for="description" class="form-label">Descripción</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-file-text"></i></span>
-                    <input class="form-control" type="text" name="description" id="description" placeholder="Ej. Último modelo con características avanzadas" required>
-                </div>
-            </div>
+<!-- Formulario para agregar nuevos productos -->
+<form id="addProductForm">
+    <label for="title">Título:</label>
+    <input type="text" id="title" name="title" required><br>
 
-            <!-- Stock -->
-            <div class="col-md-6">
-                <label for="stock" class="form-label">Stock</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-box"></i></span>
-                    <input class="form-control" type="number" name="stock" id="stock" placeholder="Ej. 100" required>
-                </div>
-            </div>
+    <label for="description">Descripción:</label>
+    <textarea id="description" name="description" required></textarea><br>
 
-            <!-- Imagen (URL) -->
-            <div class="col-md-6">
-                <label for="thumbnail" class="form-label">Imagen (URL)</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-image"></i></span>
-                    <input class="form-control" type="text" name="thumbnail" id="thumbnail" placeholder="Ej. https://example.com/image.jpg" required>
-                </div>
-            </div>
+    <label for="code">Código:</label>
+    <input type="text" id="code" name="code" required><br>
 
-            <!-- Categoría -->
-            <div class="col-md-6">
-                <label for="category" class="form-label">Categoría</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-grid"></i></span>
-                    <input class="form-control" type="text" name="category" id="category" placeholder="Ej. Electrónicos" required>
-                </div>
-            </div>
+    <label for="price">Precio:</label>
+    <input type="number" id="price" name="price" step="0.01" required><br>
 
-            <!-- Precio -->
-            <div class="col-md-6">
-                <label for="price" class="form-label">Precio</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
-                    <input class="form-control" type="number" name="price" id="price" placeholder="Ej. 499.99" required>
-                </div>
-            </div>
+    <label for="stock">Stock:</label>
+    <input type="number" id="stock" name="stock" required><br>
 
-            <!-- Estado (Checkbox) -->
-            <div class="col-md-6">
-                <div class="form-check mt-4">
-                    <input name="status" class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" checked>
-                    <label class="form-check-label" for="flexCheckChecked">Estado</label>
-                </div>
-            </div>
+    <label for="category">Categoría:</label>
+    <input type="text" id="category" name="category" required><br>
 
-            <!-- Código -->
-            <div class="col-md-6">
-                <label for="code" class="form-label">Código</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-tag"></i></span>
-                    <input class="form-control" type="text" name="code" id="code" placeholder="Ej. ABC123" required>
-                </div>
-            </div>
-        </div>
+    <label for="thumbnails">URL de Thumbnails:</label>
+    <input type="text" id="thumbnails" name="thumbnails"><br>
 
-        <!-- Botón para registrar un nuevo producto -->
-        <div class="col-12 mt-4">
-            <button class="btn btn-primary" type="submit" id="add-btn">Registrar </button>
-        </div>
-    </div>
-
-    <!-- Sección para eliminar productos -->
-    <div class="col-12 mt-4">
-        <h2>Eliminar Producto:</h2>
-
-        <!-- Fila para el campo ID del Producto a Eliminar -->
-        <div class="row">
-            <div class="col-md-6">
-                <label for="id-prod" class="form-label">ID del Producto</label>
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-trash"></i></span>
-                    <input class="form-control" type="number" name="id-prod" id="id-prod" placeholder="Ej. 123">
-                </div>
-            </div>
-
-            <!-- Botón para eliminar un producto -->
-            <div class="col-12 mt-4">
-                <button class="btn btn-danger" type="button" id="delete-btn">Eliminar</button>
-            </div>
-        </div>
-    </div>
+    <button type="submit">Agregar Producto</button>
 </form>
 
-<!-- Contenedor para mostrar la lista de productos -->
-<div class="row mt-4" id="list-products"></div>
+<ul id="productList">
+    {{#each productos}}
+    <li>
+        <!-- Mostrar detalles del producto -->
+        <strong>ID:</strong> {{this.id}} <br>
+        <strong>Título:</strong> {{this.title}} <br>
+        <strong>Descripción:</strong> {{this.description}} <br>
+        <!-- Otros detalles del producto -->
+    </li>
+    {{/each}}
+</ul>
 
-<!-- Inclusión de scripts de Socket.IO y el script de tiempo real -->
 <script src="/socket.io/socket.io.js"></script>
-<script src="/js/realtime.js"></script>
+<script src="./js/realTimeProducts.js"></script>
