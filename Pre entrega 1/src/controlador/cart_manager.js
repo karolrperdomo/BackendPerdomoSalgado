@@ -6,7 +6,7 @@ const prodManaMetod = new ProductManager
 
 class CartManager {
     constructor() {
-        this.path = "./src/modelos/cart.json"
+        this.path = "./src/models/cart.json"
     }
 
     existCart = async (id) => {
