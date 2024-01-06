@@ -1,45 +1,113 @@
-<center>
-<h1>Productos en tiempo real</h1>
-</center>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos en Tiempo Real</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
 
+        h1 {
+            color: #333;
+            text-align: center;
+        }
 
-<!-- Formulario para agregar nuevos productos -->
-<form id="addProductForm">
-    <label for="title">Título:</label>
-    <input type="text" id="title" name="title" required><br>
+        form, table {
+            width: 100%;
+            margin-top: 20px;
+        }
 
-    <label for="description">Descripción:</label>
-    <textarea id="description" name="description" required></textarea><br>
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
 
-    <label for="code">Código:</label>
-    <input type="text" id="code" name="code" required><br>
+        input, textarea, select {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
 
-    <label for="price">Precio:</label>
-    <input type="number" id="price" name="price" step="0.01" required><br>
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    <label for="stock">Stock:</label>
-    <input type="number" id="stock" name="stock" required><br>
+        button:hover {
+            background-color: #45a049;
+        }
 
-    <label for="category">Categoría:</label>
-    <input type="text" id="category" name="category" required><br>
+        table {
+            border-collapse: collapse;
+        }
 
-    <label for="thumbnails">URL de Thumbnails:</label>
-    <input type="text" id="thumbnails" name="thumbnails"><br>
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
 
-    <button type="submit">Agregar Producto</button>
-</form>
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>Productos en Tiempo Real</h1>
+    </center>
 
-<ul id="productList">
-    {{#each productos}}
-    <li>
-        <!-- Mostrar detalles del producto -->
-        <strong>ID:</strong> {{this.id}} <br>
-        <strong>Título:</strong> {{this.title}} <br>
-        <strong>Descripción:</strong> {{this.description}} <br>
-        <!-- Otros detalles del producto -->
-    </li>
-    {{/each}}
-</ul>
+    <!-- Formulario para agregar nuevos productos -->
+    <form id="addProductForm">
+        <label for="title">Título:</label>
+        <input type="text" id="title" name="title" required>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="./js/realTimeProducts.js"></script>
+        <label for="description">Descripción:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <label for="code">Código:</label>
+        <input type="text" id="code" name="code" required>
+
+        <label for="price">Precio:</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" required>
+
+        <label for="category">Categoría:</label>
+        <input type="text" id="category" name="category" required>
+
+        <label for="thumbnails">URL de Thumbnails:</label>
+        <input type="text" id="thumbnails" name="thumbnails">
+
+        <button type="submit">Agregar Producto</button>
+    </form>
+
+    <!-- Product list in a table -->
+    <table>
+
+        <tbody id="productList">
+            {{#each productos}}
+            <tr>
+                <!-- Display product details in table rows -->
+                <td>{{this.id}}</td>
+                <td>{{this.title}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.code}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/realTimeProducts.js"></script>
+</body>
+</html>
