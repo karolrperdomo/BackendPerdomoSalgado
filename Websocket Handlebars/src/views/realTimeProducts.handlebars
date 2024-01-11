@@ -47,6 +47,7 @@
 
         table {
             border-collapse: collapse;
+            width: 100%;
         }
 
         th, td {
@@ -91,20 +92,28 @@
         <button type="submit">Agregar Producto</button>
     </form>
 
-    <!-- Product list in a table -->
+    <!-- Lista de productos en la tabla -->
     <table>
-
-        <tbody id="productList">
-            {{#each productos}}
+        <thead>
             <tr>
-                <!-- Display product details in table rows -->
-                <td>{{this.id}}</td>
-                <td>{{this.title}}</td>
-                <td>{{this.description}}</td>
-                <td>{{this.code}}</td>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Código</th>
             </tr>
-            {{/each}}
+        </thead>
+        <tbody id="productList">
+            <!-- ... Filas de productos ... -->
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <label for="eliminarCodigoSelect">Seleccionar Código:</label>
+                    <select id="eliminarCodigoSelect"></select>
+                    <button id="eliminarCodigoBtn">Eliminar Código</button>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
     <script src="/socket.io/socket.io.js"></script>
