@@ -41,7 +41,6 @@ io.on('connection', (socket) => {
     console.log('Usuario conectado');
     socket.emit('updateProducts', productos);
 
-    // Cambiar el evento 'eliminarCodigo' a 'eliminarProducto'
     socket.on('eliminarProducto', (productId) => {
         const success = eliminarProductoPorId(productId);
 
