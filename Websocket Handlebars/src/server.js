@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configuración de Handlebars
-app.engine('handlebars', handlebars.engine());
+const hbs = handlebars.create();
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.set('views', __dirname + '/views');
 
@@ -40,25 +41,9 @@ io.on('connection', (socket) => {
     console.log('Usuario conectado');
     socket.emit('updateProducts', productos);
 
-    socket.on('addProduct', (newProduct) => {
-        // Agregar el nuevo producto a la lista
-        productos.push(newProduct);
-
-        // Guardar los cambios en el archivo JSON
-        fs.writeFile('./src/jsonDb/products.json', JSON.stringify(productos), (err) => {
-            if (err) {
-                console.error('Error writing to products.json', err);
-                return;
-            }
-            console.log('Product added and database updated.');
-
-            // Emitir la lista actualizada de productos a todos los clientes
-            io.emit('updateProducts', productos);
-        });
-    });
-
-    socket.on('eliminarCodigo', (codigo) => {
-        const success = eliminarProductoPorCodigo(codigo);
+    // Cambiar el evento 'eliminarCodigo' a 'eliminarProducto'
+    socket.on('eliminarProducto', (productId) => {
+        const success = eliminarProductoPorId(productId);
 
         // Emitir respuesta al cliente
         socket.emit('eliminarCodigoResponse', success);
@@ -68,23 +53,19 @@ io.on('connection', (socket) => {
     });
 });
 
-function eliminarProductoPorCodigo(codigo) {
-    // Implementa la lógica para eliminar el producto con el código proporcionado
+function eliminarProductoPorId(productId) {
     // Retorna true si se elimina correctamente, false si hay algún problema
-    // Ejemplo ficticio:
-    productos = productos.filter(producto => producto.code !== codigo);
+    productos = productos.filter(producto => producto.id !== productId);
     return true; // o return false; según la lógica real
 }
 
 function emitirListaDeProductos() {
-    // Lógica para obtener la lista actualizada de productos y emitirla a todos los clientes
+    // lista actualizada de productos y emitirla a todos los clientes
     const productos = obtenerListaDeProductos();
     io.emit('updateProducts', productos);
 }
 
 function obtenerListaDeProductos() {
     // Lógica para obtener la lista actualizada de productos
-    // Puede ser desde una base de datos, una variable en memoria, etc.
-    // Ejemplo ficticio:
     return productos;
 }

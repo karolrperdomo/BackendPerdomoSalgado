@@ -2,25 +2,28 @@ document.addEventListener('DOMContentLoaded', function () {
     const socket = io();
     let lastProductId = 0;
 
-    // Agregar manejador de clic al botón para eliminar código
+    // Agregar manejador de clic al botón para eliminar producto por ID
     document.getElementById('eliminarCodigoBtn').addEventListener('click', function() {
         const selectElement = document.getElementById('eliminarCodigoSelect');
-        const selectedCode = selectElement.value;
+        const selectedId = parseInt(selectElement.value);
 
-        if (selectedCode) {
-            // Emitir evento para eliminar producto con el código seleccionado
-            socket.emit('eliminarCodigo', selectedCode);
+        if (!isNaN(selectedId)) {
+            // Emitir evento para eliminar producto con el ID seleccionado
+            socket.emit('eliminarProducto', selectedId);
         } else {
-            alert('Selecciona un código antes de eliminar.');
+            alert('Selecciona un ID antes de eliminar.');
         }
     });
+
+    // Añadir el manejador 'updateProducts'
+    socket.on('updateProducts', updateProductsHandler);
 
     // Función para manejar la actualización de productos
     function updateProductsHandler(products) {
         const productList = document.getElementById('productList');
         const eliminarCodigoSelect = document.getElementById('eliminarCodigoSelect');
         productList.innerHTML = '';
-        eliminarCodigoSelect.innerHTML = '<option value="">Seleccionar código</option>';
+        eliminarCodigoSelect.innerHTML = '<option value="">Seleccionar ID</option>';
 
         products.forEach(product => {
             const row = document.createElement('tr');
@@ -32,28 +35,15 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
             productList.appendChild(row);
 
-            // Agregar opciones al select para cada código existente
+            // Agregar opciones al select para cada ID existente
             const option = document.createElement('option');
-            option.value = product.code;
-            option.textContent = product.code;
+            option.value = product.id;
+            option.textContent = product.id;
             eliminarCodigoSelect.appendChild(option);
 
             lastProductId = Math.max(lastProductId, product.id);
         });
     }
-
-    // Añadir el manejador 'updateProducts'
-    socket.on('updateProducts', updateProductsHandler);
-
-    // Agregar manejador para el evento 'eliminarCodigoResponse' del servidor
-    socket.on('eliminarCodigoResponse', function(success) {
-        if (success) {
-            // El producto se eliminó correctamente, actualizar la lista de productos
-            socket.emit('getProducts'); // Solicitar la actualización de la lista de productos
-        } else {
-            alert('Error al eliminar el código.');
-        }
-    });
 
     // Agregar el evento 'submit' del formulario para agregar nuevos productos
     document.getElementById('addProductForm').addEventListener('submit', function(event) {
