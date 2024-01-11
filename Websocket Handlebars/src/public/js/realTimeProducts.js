@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let lastProductId = 0;
 
     // Agregar manejador de clic al botón para eliminar producto por ID
-    document.getElementById('eliminarCodigoBtn').addEventListener('click', function() {
+    document.getElementById('eliminarCodigoBtn').addEventListener('click', function () {
         const selectElement = document.getElementById('eliminarCodigoSelect');
         const selectedId = parseInt(selectElement.value);
 
@@ -22,11 +22,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateProductsHandler(products) {
         const productList = document.getElementById('productList');
         const eliminarCodigoSelect = document.getElementById('eliminarCodigoSelect');
+
+        // Limpiar la tabla y la lista desplegable antes de agregar las filas y opciones actualizadas
         productList.innerHTML = '';
-        eliminarCodigoSelect.innerHTML = '<option value="">Seleccionar ID</option>';
+        eliminarCodigoSelect.innerHTML = '';
 
         products.forEach(product => {
             const row = document.createElement('tr');
+            // Crear las celdas de la fila utilizando product.id, product.title, etc.
             row.innerHTML = `
                 <td>${product.id}</td>
                 <td>${product.title}</td>
@@ -46,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Agregar el evento 'submit' del formulario para agregar nuevos productos
-    document.getElementById('addProductForm').addEventListener('submit', function(event) {
+    document.getElementById('addProductForm').addEventListener('submit', function (event) {
         event.preventDefault();
-        
+
         const title = document.getElementById('title').value.trim();
         const description = document.getElementById('description').value.trim();
         const code = document.getElementById('code').value.trim();
@@ -57,9 +60,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const category = document.getElementById('category').value.trim();
         const thumbnails = document.getElementById('thumbnails').value.trim().split(',');
 
-        lastProductId++;
         const newProduct = {
-            id: lastProductId,
+            id: lastProductId + 1,
             title,
             description,
             code,
@@ -69,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             thumbnails
         };
 
+        // Emitir evento para agregar nuevo producto
         socket.emit('addProduct', newProduct);
 
         this.reset();

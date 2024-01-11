@@ -39,15 +39,23 @@ const io = new ServerIO(httpServer);
 
 io.on('connection', (socket) => {
     console.log('Usuario conectado');
-    socket.emit('updateProducts', productos);
+    emitirListaDeProductos(socket); // Emitir la lista de productos al cliente que se conecta
 
     socket.on('eliminarProducto', (productId) => {
         const success = eliminarProductoPorId(productId);
 
-        // Emitir respuesta al cliente
+        // Emitir respuesta al cliente que envió la solicitud
         socket.emit('eliminarCodigoResponse', success);
 
-        // Actualizar la lista de productos y emitir a todos los clientes
+        // Emitir la lista de productos actualizada a todos los clientes
+        emitirListaDeProductos();
+    });
+
+    // Agregar manejador para el evento 'addProduct'
+    socket.on('addProduct', (newProduct) => {
+        agregarNuevoProducto(newProduct);
+
+        // Emitir la lista de productos actualizada a todos los clientes
         emitirListaDeProductos();
     });
 });
@@ -58,10 +66,19 @@ function eliminarProductoPorId(productId) {
     return true; // o return false; según la lógica real
 }
 
-function emitirListaDeProductos() {
-    // lista actualizada de productos y emitirla a todos los clientes
+function agregarNuevoProducto(newProduct) {
+    // Lógica para agregar el nuevo producto a la lista
+    productos.push(newProduct);
+}
+
+function emitirListaDeProductos(socket) {
+    // Lista actualizada de productos y emitirla al cliente específico o a todos los clientes
     const productos = obtenerListaDeProductos();
-    io.emit('updateProducts', productos);
+    if (socket) {
+        socket.emit('updateProducts', productos);
+    } else {
+        io.emit('updateProducts', productos);
+    }
 }
 
 function obtenerListaDeProductos() {
