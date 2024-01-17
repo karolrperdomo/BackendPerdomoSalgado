@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "title": "Bandeja Paisa",
+        "description": "Plato típico colombiano que incluye carne molida, arroz, frijoles, huevo frito, aguacate, plátano maduro, chorizo y arepa.",
+        "productN": "Plato",
+        "price": 9800,
+        "thumbnail": "URL_DE_LA_IMAGEN",
+        "code": "2A32F3212",
+        "stock": 85
+    },
+    {
+        "id": 2,
+        "title": "Ajiaco",
+        "description": "Sopa tradicional colombiana hecha con papas, pollo, maíz y guascas, servida con aguacate y crema.",
+        "productN": "Sopa",
+        "price": 10800,
+        "thumbnail": "URL_DE_LA_IMAGEN",
+        "code": "2A32F3214",
+        "stock": 28
+    },
+    {
+        "id": 3,
+        "title": "Aguardiente Antioqueño",
+        "description": "Bebida alcohólica típica de Colombia, especialmente popular en la región de Antioquia.",
+        "productN": "Bebida",
+        "price": 9800,
+        "thumbnail": "URL_DE_LA_IMAGEN",
+        "code": "2A32F3226",
+        "stock": 120
+    },
+    {
+        "id": 4,
+        "title": "Sancocho",
+        "description": "Guiso colombiano espeso y sustancioso con pollo, carne de res, plátano, yuca, maíz y papa.",
+        "productN": "Guiso",
+        "price": 13800,
+        "thumbnail": "URL_DE_LA_IMAGEN",
+        "code": "2A32F3228",
+        "stock": 90
+    },
+    {
+        "id": 5,
+        "title": "Empanadas",
+        "description": "Empanadas colombianas rellenas de carne, papa y otros ingredientes, generalmente fritas hasta que estén crujientes.",
+        "productN": "Aperitivo",
+        "price": 15800,
+        "thumbnail": "URL_DE_LA_IMAGEN",
+        "code": "2A32F3230",
+        "stock": 98
+    },
+    {
+        "id": 6,
+        "title": "Bocadillo con Queso",
+        "description": "Postre colombiano que consiste en bocadillo (dulce de guayaba) servido con queso blanco.",
+        "productN": "Postre",
+        "price": 11800,
+        "thumbnail": "URL_DE_LA_IMAGEN",
+        "code": "2A32F3231",
+        "stock": 83
+    }
+]
