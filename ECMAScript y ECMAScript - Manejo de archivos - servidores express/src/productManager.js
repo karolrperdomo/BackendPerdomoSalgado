@@ -111,8 +111,6 @@ class ProductManager {
             }
           }
           
-
-          
           async deleteProductById(id) {
             try {
               
