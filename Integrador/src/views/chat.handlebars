@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+</head>
+<body>
+    <h1>Chat en Tiempo Real</h1>
+
+    <!-- Mostrar la lista de mensajes -->
+    <div id="messageList">
+        {{#each messages}}
+            <p><strong>{{this.user}}:</strong> {{this.message}}</p>
+        {{/each}}
+    </div>
+
+    <!-- Formulario para enviar nuevos mensajes -->
+    <form id="chatForm">
+        <label for="user">Usuario:</label>
+        <input type="text" id="user" name="user" required>
+
+        <label for="message">Mensaje:</label>
+        <input type="text" id="message" name="message" required>
+
+        <button type="submit">Enviar Mensaje</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/chat.js"></script>
+</body>
+</html>
