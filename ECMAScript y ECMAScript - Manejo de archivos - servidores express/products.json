@@ -1,11 +1,62 @@
 [
-  {
-    "id": 1,
-    "title": "producto prueba",
-    "description": "Este es un producto prueba",
-    "price": 200,
-    "thumbnail": "Sin imagen",
-    "code": "abc123",
-    "stock": 25
-  }
+    {
+        "id": 1,
+        "title": "Bandeja Paisa",
+        "description": "Plato típico colombiano que incluye carne molida, arroz, frijoles, huevo frito, aguacate, plátano maduro, chorizo y arepa.",
+        "productN": "Plato",
+        "price": 9800,
+        "thumbnail": "https://i.blogs.es/206a55/bandeja-paisa-colombiana/450_1000.jpg",
+        "code": "2A32F3212",
+        "stock": 85
+    },
+    {
+        "id": 2,
+        "title": "Ajiaco",
+        "description": "Sopa tradicional colombiana hecha con papas, pollo, maíz y guascas, servida con aguacate y crema.",
+        "productN": "Sopa",
+        "price": 10800,
+        "thumbnail": "https://i.blogs.es/206a55/bandeja-paisa-colombiana/450_1000.jpg",
+        "code": "2A32F3214",
+        "stock": 28
+    },
+    {
+        "id": 3,
+        "title": "Aguardiente Antioqueño",
+        "description": "Bebida alcohólica típica de Colombia, especialmente popular en la región de Antioquia.",
+        "productN": "Bebida",
+        "price": 9800,
+        "thumbnail": "https://lavaquita.co/cdn/shop/products/supermercados_la_vaquita_supervaquita_aguardiente_antioqueno_sin_azucar_750ml_tapa_verde_botella_800x800.jpg?v=1629727533",
+        "code": "2A32F3226",
+        "stock": 120
+    },
+    {
+        "id": 4,
+        "title": "Sancocho",
+        "description": "Guiso colombiano espeso y sustancioso con pollo, carne de res, plátano, yuca, maíz y papa.",
+        "productN": "Guiso",
+        "price": 13800,
+        "thumbnail": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.elespectador.com%2Fgastronomia-y-recetas%2Freceta-asi-se-prepara-el-sancocho-de-costilla-de-res%2F&psig=AOvVaw2uJebIpSE9-Fjx_hBRAvf_&ust=1705540434739000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCND56bCf44MDFQAAAAAdAAAAABAD",
+        "code": "2A32F3228",
+        "stock": 90
+    },
+    {
+        "id": 5,
+        "title": "Empanadas",
+        "description": "Empanadas colombianas rellenas de carne, papa y otros ingredientes, generalmente fritas hasta que estén crujientes.",
+        "productN": "Aperitivo",
+        "price": 15800,
+        "thumbnail": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.labuena.com.co%2Fsabor-colombiano-cat%2Fguiso-para-empanadas-colombianas%2F&psig=AOvVaw3SL5MBOhTFl0nwk-rAj1US&ust=1705540455083000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLD7wLqf44MDFQAAAAAdAAAAABAD",
+        "code": "2A32F3230",
+        "stock": 98
+    },
+    {
+        "id": 6,
+        "title": "Bocadillo con Queso",
+        "description": "Postre colombiano que consiste en bocadillo (dulce de guayaba) servido con queso blanco.",
+        "productN": "Postre",
+        "price": 11800,
+        "thumbnail": "URL_DE_LA_IMAGEN",
+        "code": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fboquisabroso.com.co%2Fpostres%2Fbocadillo-con-queso%2F&psig=AOvVaw1RMTiV4ICY2FW8Zr0qm8No&ust=1705540489484000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIDl8Mqf44MDFQAAAAAdAAAAABAD",
+        "stock": 83
+    }
 ]
