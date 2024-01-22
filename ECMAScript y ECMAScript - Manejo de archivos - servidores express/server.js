@@ -4,12 +4,12 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-const productManager = require('./src/productManager')
-const productos = new productManager("products");
+const productManagerFileSystem = require('./src/productManagerFileSystem')
+const productos = new productManagerFileSystem("products");
 
 // http:// localhost:8080 /
 app.get('/', (req, res)=> {
-    res.send('<h1>Server express<h1>') 
+    res.send('<h1>Bienvenidos a mi primer server express<h1>') 
 })
 
 const router = express.Router();
