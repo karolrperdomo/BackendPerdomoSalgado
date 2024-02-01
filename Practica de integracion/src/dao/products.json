@@ -1,0 +1,24 @@
+[
+    {
+        "id": 4,
+        "title": "asd",
+        "description": "asd",
+        "price": "2323",
+        "category": "zapatillas",
+        "status": true,
+        "thumbnail": "https://i.ibb.co/nngfHbZ/puma.png|",
+        "code": "asdsadasdsa",
+        "stock": "222"
+    },
+    {
+        "id": 5,
+        "title": "asd",
+        "description": "asd",
+        "price": "2323",
+        "category": "zapatillas",
+        "status": true,
+        "thumbnail": "https://i.ibb.co/nngfHbZ/puma.png|",
+        "code": "asdsadasdsa",
+        "stock": "222"
+    }
+]
