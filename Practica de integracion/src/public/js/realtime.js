@@ -1,85 +1,79 @@
-const socketClient=io()
+document.addEventListener('DOMContentLoaded', function () {
+  const socket = io();
+  let lastProductId = 0;
 
-socketClient.on("enviodeproducts",(obj)=>{
-    updateProductList(obj)
-})
+  // Agregar manejador de clic al botón para eliminar producto por ID
+  document.getElementById('eliminarCodigoBtn').addEventListener('click', function () {
+      const selectElement = document.getElementById('eliminarCodigoSelect');
+      const selectedId = parseInt(selectElement.value);
 
-
-function updateProductList(productList) {
- 
-    const productsDiv  = document.getElementById('list-products')
-
-    let productosHTML = "";
-  
-    productList.forEach((product) => {
-        productosHTML += `<div class="card bg-secondary mb-3 mx-4 my-4" style="max-width: 20rem;">
-        <div class="card-headerrt">code: ${product.code}</div>
-        <div class="card-body">
-            <h4 class="card-title text-white">${product.title}</h4>
-            <p class="card-text">
-            <ul class="card-text">
-            <li>id: ${product._id}</li>
-            <li>description: ${product.description}</li>
-            <li>price: $${product.price}</li>
-            <li>category: ${product.category}</li>
-            <li>status: ${product.status}</li>
-            <li>stock: ${product.stock}</li>
-            thumbnail: <img src="${product.thumbnail}" alt="img" class="img-thumbnail img-fluid">        </ul>
-            </p>
-        </div>
-        <div class="d-flex justify-content-center mb-4">
-        <button type="button" class="btn btn-danger delete-btn" onclick="deleteProduct('${String(product._id)}')">Eliminar</button>
-        </div>
-        
-    </div>
-</div>`;
-    });
-  
-    productsDiv .innerHTML = productosHTML;
-  }
-
-
-  let form = document.getElementById("formProduct");
-  form.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-  
-    let title = form.elements.title.value;
-    let description = form.elements.description.value;
-    let stock = form.elements.stock.value;
-    let thumbnail = form.elements.thumbnail.value;
-    let category = form.elements.category.value;
-    let price = form.elements.price.value;
-    let code = form.elements.code.value;
-    let status = form.elements.status.checked; // Obtén el valor del checkbox
-  
-    socketClient.emit("addProduct", {
-      title,
-      description, 
-      stock,
-      thumbnail,
-      category,
-      price,
-      code,
-      status, // Agrega el campo status al objeto enviado al servidor
-  
-    });
-  
-    form.reset();
+      if (!isNaN(selectedId)) {
+          // Emitir evento para eliminar producto con el ID seleccionado
+          socket.emit('eliminarProducto', selectedId);
+      } else {
+          alert('Selecciona un ID antes de eliminar.');
+      }
   });
 
+  // Añadir el manejador 'updateProducts'
+  socket.on('updateProducts', updateProductsHandler);
 
-  
-  //para eliminar por ID
-document.getElementById("delete-btn").addEventListener("click", function () {
-    const deleteidinput = document.getElementById("id-prod");
-    const deleteid = deleteidinput.value;
-    socketClient.emit("deleteProduct", deleteid);
-    deleteidinput.value = "";
-  })
+  // Función para manejar la actualización de productos
+  function updateProductsHandler(products) {
+      const productList = document.getElementById('productList');
+      const eliminarCodigoSelect = document.getElementById('eliminarCodigoSelect');
 
+      // Limpiar la tabla y la lista desplegable antes de agregar las filas y opciones actualizadas
+      productList.innerHTML = '';
+      eliminarCodigoSelect.innerHTML = '';
 
+      products.forEach(product => {
+          const row = document.createElement('tr');
+          // Crear las celdas de la fila utilizando product.id, product.title, etc.
+          row.innerHTML = `
+              <td>${product.id}</td>
+              <td>${product.title}</td>
+              <td>${product.description}</td>
+              <td>${product.code}</td>
+          `;
+          productList.appendChild(row);
 
-//para eliminar el producto directamente 
-function deleteProduct(productId) {
-  socketClient.emit("deleteProduct", productId);
-}
+          // Agregar opciones al select para cada ID existente
+          const option = document.createElement('option');
+          option.value = product.id;
+          option.textContent = product.id;
+          eliminarCodigoSelect.appendChild(option);
+
+          lastProductId = Math.max(lastProductId, product.id);
+      });
+  }
+
+  // Agregar el evento 'submit' del formulario para agregar nuevos productos
+  document.getElementById('addProductForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const title = document.getElementById('title').value.trim();
+      const description = document.getElementById('description').value.trim();
+      const code = document.getElementById('code').value.trim();
+      const price = parseFloat(document.getElementById('price').value);
+      const stock = parseInt(document.getElementById('stock').value);
+      const category = document.getElementById('category').value.trim();
+      const thumbnails = document.getElementById('thumbnails').value.trim().split(',');
+
+      const newProduct = {
+          id: lastProductId + 1,
+          title,
+          description,
+          code,
+          price,
+          stock,
+          category,
+          thumbnails
+      };
+
+      // Emitir evento para agregar nuevo producto
+      socket.emit('addProduct', newProduct);
+
+      this.reset();
+  });
+});

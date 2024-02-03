@@ -1,57 +1,83 @@
-import { Router } from 'express'
-import cartsModel from '../models/carts.model.js'
-export const cartsRouter = Router()
+import { Router } from 'express';
+import mongoose from 'mongoose'; // Importa mongoose
+
+import cartsModel from '../models/carts.model.js';
+
+export const cartsRouter = Router();
 
 cartsRouter
-    .get('/carts', async (request, responses)=>{
+    .get('/carts', async (request, responses) => {
         try {
-            const carts = await cartsModel.find({isActive: true})
+            const carts = await cartsModel.find({ isActive: true });
             responses.json({
                 status: 'success',
                 result: carts
-            })
+            });
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            responses.status(500).json({
+                status: 'error',
+                error: 'Internal Server Error'
+            });
         }
     })
-    .post('/carts', async (request, responses)=>{
+    .post('/carts', async (request, responses) => {
         try {
-            const { body } = request
-            const result = await cartsModel.create(body)
-
+            const { body } = request;
+            const result = await cartsModel.create(body);
             responses.send({
                 status: 'success',
                 result
-            })
+            });
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            responses.status(500).json({
+                status: 'error',
+                error: 'Internal Server Error'
+            });
         }
     })
-    .get('/carts/:cid', async (request, responses)=>{
+    .get('/carts/:cid', async (request, responses) => {
         try {
-            const { cid } = request.params
-            const user = await cartsModel.findOne({_id: cid})
+            const { cid } = request.params;
+            const user = await cartsModel.findOne({ _id: cid });
             responses.json({
                 status: 'success',
                 result: user
-            })
+            });
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            responses.status(500).json({
+                status: 'error',
+                error: 'Internal Server Error'
+            });
         }
     })
-    .put('/carts/:cid', async (request, responses)=>{
+    .put('/carts/:cid', async (request, responses) => {
         try {
-            responses.send('update user')
+            const { cid } = request.params;
+            const objectIdCid = mongoose.Types.ObjectId(cid); // Convierte cid a un ObjectId válido
+            // Aquí deberías agregar tu código para actualizar el carrito usando objectIdCid
+            responses.send('update user');
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            responses.status(500).json({
+                status: 'error',
+                error: 'Internal Server Error'
+            });
         }
     })
-    .delete('/carts/:cid', async (request, responses)=>{
+    .delete('/carts/:cid', async (request, responses) => {
         try {
-            const {cid} = request.params
-            const result = await cartsModel.findByIdAndUpdate({_id:cid}, {isActive: false})
-            responses.send('delete user')
+            const { cid } = request.params;
+            const objectIdCid = mongoose.Types.ObjectId(cid); // Convierte cid a un ObjectId válido
+            const result = await cartsModel.findByIdAndUpdate({ _id: objectIdCid }, { isActive: false });
+            responses.send('delete user');
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            responses.status(500).json({
+                status: 'error',
+                error: 'Internal Server Error'
+            });
         }
-    })
+    });
