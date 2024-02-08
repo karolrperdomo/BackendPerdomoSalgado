@@ -1,0 +1,135 @@
+<style>
+    .custom-form {
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    .custom-heading {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .custom-col {
+        margin-bottom: 20px;
+    }
+
+    .custom-label {
+        font-weight: bold;
+    }
+
+    .custom-input-group {
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .custom-checkbox {
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-checkbox-input {
+        margin-right: 10px;
+    }
+
+    .custom-checkbox-label {
+        font-size: 16px;
+    }
+
+    .custom-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .custom-btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .custom-btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .custom-list-products {
+        margin-top: 40px;
+    }
+
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .custom-table th {
+        background-color: #f0f0f0;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .custom-table td {
+        text-align: left;
+    }
+</style>
+
+<form class="custom-form" id="formProduct">
+    <h2 class="custom-heading">Productos en Tiempo Real</h2>
+
+    <table class="custom-table">
+        <tr>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Stock</th>
+            <th>URL de Thumbnails</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Código</th>
+        </tr>
+        <tr>
+            <td><input class="custom-input" type="text" name="title" id="title" required></td>
+            <td><input class="custom-input" type="text" name="description" id="description" required></td>
+            <td><input class="custom-input" type="number" name="stock" id="stock" required></td>
+            <td><input class="custom-input" type="text" name="thumbnail" id="thumbnail" required></td>
+            <td><input class="custom-input" type="text" name="category" id="category" required></td>
+            <td><input class="custom-input" type="number" name="price" id="price" required></td>
+            <td><input name="status" class="custom-checkbox-input" type="checkbox" value="true" id="flexCheckChecked" checked></td>
+            <td><input class="custom-input" type="text" name="code" id="code" required></td>
+        </tr>
+    </table>
+
+    <div class="custom-col">
+        <button class="custom-btn custom-btn-primary" type="submit" id="add-btn">Registrar </button>
+    </div>
+
+    <h2 class="custom-heading">Eliminar Producto:</h2>
+
+    <div class="custom-col">
+        <label for="id-prod" class="custom-label">ID del Producto</label>
+        <div class="custom-input-group">
+            <input class="custom-input" type="text" name="id-prod" id="id-prod">
+        </div>
+    </div>
+
+    <div class="custom-col">
+        <button class="custom-btn custom-btn-danger" type="button" id="delete-btn">Eliminar</button>
+    </div>
+</form>
+
+<div class="custom-list-products">
+
+</div>

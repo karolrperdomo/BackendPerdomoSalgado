@@ -1,0 +1,66 @@
+.custom-form {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.custom-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.custom-col {
+    margin-bottom: 20px;
+}
+
+.custom-label {
+    font-weight: bold;
+}
+
+.custom-input-group {
+    display: flex;
+    align-items: center;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.custom-checkbox-input {
+    margin-right: 10px;
+}
+
+.custom-checkbox-label {
+    font-size: 16px;
+}
+
+.custom-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+}
+
+.custom-btn-primary {
+    background-color: #007bff;
+}
+
+.custom-btn-danger {
+    background-color: #dc3545;
+}
+
+.custom-list-products {
+    margin-top: 40px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+}
