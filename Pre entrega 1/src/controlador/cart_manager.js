@@ -8,7 +8,7 @@ class CartManager {
     constructor() {
         this.path = "./src/models/cart.json"
     }
-
+s
     existCart = async (id) => {
         let cartExist = await this.readCart()
         return cartExist.find(cart => cart.id === id)

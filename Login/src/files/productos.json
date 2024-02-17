@@ -1,0 +1,25 @@
+[
+    {
+        "title": "Bandeja Paisa",
+        "description": "Plato típico colombiano que incluye carne molida, chicharrón, arroz, frijoles, huevo frito, aguacate y plátano maduro.",
+        "price": 15.99,
+        "category": "Comida Típica Colombiana",
+        "status": true,
+        "thumbnail": "https://i.ibb.co/nngfHbZ/bandeja-paisa.png",
+        "code": "BANDEJA001",
+        "stock": 30, 
+        "id": 1
+    },
+    {
+        "title": "Ajiaco Bogotano",
+        "description": "Sopa colombiana tradicional con pollo, papas, mazorcas, guascas y crema de leche.",
+        "price": 10.99,
+        "category": "Comida Típica Colombiana",
+        "status": true,
+        "thumbnail": "https://i.ibb.co/nngfHbZ/ajiaco-bogotano.png",
+        "code": "AJIACO002",
+        "stock": 25,
+        "id": 2
+
+    }
+]

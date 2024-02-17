@@ -3,7 +3,7 @@ import {nanoid} from 'nanoid'
 
 class ProductManager{
     constructor(){
-        this.path = "./src/modelos/products.json"
+        this.path = "./modelos/products.json";
     }
     
     readProducts = async ()=>{
