@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Productos</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 28px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .user-info {
+            background-color: #eeeeee;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .user-info p {
+            margin: 10px 0;
+            color: #666;
+        }
+        a {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .card-title {
+            color: #007bff;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            font-size: 16px;
+            color: #555;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+        .pagination a {
+            color: #007bff;
+            padding: 8px 12px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .pagination a:not(:last-child) {
+            margin-right: 10px;
+        }
+        .pagination a:hover {
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+        .top-actions {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .top-actions a {
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+        .filter-category {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .filter-category select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-actions">
+            <a href="/api/sessions/logout">Cerrar sesión</a>
+            <a href="http://localhost:8080/api/carts/65d2d51579e8d260c5fbf434" style="margin-left: 10px;">Ver carrito</a>
+        </div>
+        <h1>Catálogo de Productos</h1>
+        <div class="user-info">
+            {{#with user}}
+            <p>Bienvenido, {{this.first_name}}</p>
+            <p>Usuario: {{this.first_name}}</p>
+            <p>Email: {{this.email}}</p>
+            <p>Rol: {{this.role}}</p>
+            {{/with}}
+        </div>
+        <div class="filter-category">
+            <label for="categorySelect">Filtrar por categoría:</label>
+            <select id="categorySelect" onchange="location = this.value;">
+                <option value="/api/products">Ver todos los productos</option>
+                {{#each uniqueCategories}}
+                <option value="/api/products?category={{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+        {{#each product}}
+        <div class="card">
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="card-text">{{this.price}}</p>
+            <a href="/productdetail/{{this._id}}">Ver detalle</a>
+        </div>
+        {{/each}}
+        <div class="pagination">
+            {{#if hasPrevPage}}
+            <a href="/api/products?pageQuery={{prevPage}}">Anterior</a>
+            {{/if}}
+            <a href="#" style="background-color: transparent; color: #333; pointer-events: none;">{{page}}</a>
+            {{#if hasNextPage}}
+            <a href="/api/products?pageQuery={{nextPage}}">Siguiente</a>
+            {{/if}}
+        </div>
+    </div>
+</body>
+</html>

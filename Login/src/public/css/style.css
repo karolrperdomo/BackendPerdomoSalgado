@@ -1,0 +1,74 @@
+/* Esquema de colores */
+:root {
+    --primary-color: #ff7851; /* Coral */
+    --secondary-color: #ffd972; /* Amarillo suave */
+    --background-color: #fff5e6; /* Blanco crema */
+    --text-color: #333333; /* Gris oscuro */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none; /* Eliminar subrayado */
+}
+
+a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+/* Botones */
+.btn-primary {
+    background-color: var(--primary-color);
+    border: 1px solid transparent; /* Añadir borde para efecto en hover */
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Suavizar transiciones */
+}
+
+.btn-primary:hover {
+    background-color: #ff5722; /* Color más oscuro al pasar el mouse */
+    transform: scale(1.05); /* Efecto de crecimiento */
+}
+
+/* Contenedores */
+.container {
+    padding: 20px;
+    margin: auto;
+    max-width: 960px;
+    background-color: #ffffff; /* Fondo blanco para contraste */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Encabezado */
+.header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 0 0 8px 8px; /* Redondear solo esquinas inferiores */
+}
+
+/* Pie de página */
+.footer {
+    background-color: var(--secondary-color);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-radius: 8px 8px 0 0; /* Redondear solo esquinas superiores */
+}

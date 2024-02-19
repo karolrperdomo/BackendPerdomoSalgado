@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 20px;
+        color: #333;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h1 {
+        color: #0066cc;
+    }
+    .card-title, .card-text {
+        color: #555;
+    }
+    a {
+        display: inline-block;
+        margin: 10px 0;
+        background-color: #0066cc;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+    a:hover {
+        background-color: #0056b3;
+    }
+    strong {
+        color: #333;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <center>
+        <h1>Product Details</h1>
+        <a href="http://localhost:8080/api/carts/65d2d51579e8d260c5fbf434">Ver carrito</a>
+        {{#with product}}
+            <h5 class="card-title"><strong>Title: </strong>{{this.title}}</h5>
+            <p class="card-text"><strong>Description: </strong>{{this.description}}</p>
+            <p class="card-text"><strong>Code: </strong>{{this.code}}</p>
+            <p class="card-text"><strong>Price: </strong>{{this.price}}</p>
+            <p class="card-text"><strong>Stock: </strong>{{this.stock}}</p>
+            <p class="card-text"><strong>Category: </strong>{{this.category}}</p>
+            <p class="card-text"><strong>Status: </strong>{{this.status}}</p>
+        {{/with}}
+        <a href="http://localhost:8080/api/carts/65d2d51579e8d260c5fbf434/product/{{product._id}}">Añadir al carrito</a>
+    </center>
+</div>
+</body>
+</html>

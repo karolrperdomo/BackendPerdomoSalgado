@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Links</title>
+    <style>
+        /* Estilos para los elementos */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de links</h1>
+    <div>
+        <ul>
+            <li><a href="http://localhost:8080/api/users">users</a></li>
+            <li><a href="http://localhost:8080/api/products">products</a></li>
+            {{!-- <li><a href="http://localhost:8080/carts/">carts</a></li> --}}
+            <li><a href="http://localhost:8080/messages/">messages</a></li>
+            {{!-- <li><a href="http://localhost:8080/multer/">multer</a></li> --}}
+            <li><a href="http://localhost:8080/realtimeproducts/">realtimeproducts</a></li>
+            <li><a href="http://localhost:8080/api/carts/65d2d51579e8d260c5fbf434">Aqui esta un ejemplo del detalle del producto agregado al carrito</a></li>
+        </ul>
+    </div>
+</body>
+</html>

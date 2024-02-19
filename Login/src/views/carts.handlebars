@@ -1,0 +1,73 @@
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+  }
+  center {
+    max-width: 800px;
+    margin: auto;
+  }
+  .card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+  }
+  h1 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  .card-title, .card-text {
+    color: #555;
+  }
+  .card a {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  .card a:hover {
+    background-color: #0056b3;
+  }
+  .totals {
+    text-align: left;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-top: 20px;
+  }
+  .totals p {
+    font-size: 18px;
+    color: #333;
+  }
+</style>
+
+<div>
+    <center>
+        <h1>Cart Detail</h1>
+        {{#each carrito}}
+        <div class="card">
+            <h5 class="card-title"><strong>Title: </strong>{{this.product.title}}</h5>
+            <p class="card-text"><strong>Price: </strong>{{this.product.price}}</p>
+            <a href="/productdetail/{{this.product._id}}">Ver detalle</a>
+            <p class="card-text"><strong>Quantity: </strong>{{this.quantity}}</p>
+        </div>
+        {{/each}}
+        <div class="totals">
+            <p><strong>Subtotal:</strong></p>
+            <p><strong>Total:</strong></p>
+        </div>
+    </center>
+</div>
