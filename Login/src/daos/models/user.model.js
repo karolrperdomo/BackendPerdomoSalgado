@@ -1,4 +1,4 @@
-import {Schema, model} from 'mongoose';
+import { Schema, model } from 'mongoose';
 import mongoosePaginate from "mongoose-paginate-v2";
 
 const usersCollection = 'users'
@@ -26,9 +26,12 @@ const usersSchema = new Schema({
         type: String,
         enum: ['user', 'admin'],
         default: 'user'
+    },
+    cartId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Cart' // Reemplaza 'Cart' con el nombre de tu modelo de carrito
     }
-})
-
+});
 
 usersSchema.plugin(mongoosePaginate);
 
